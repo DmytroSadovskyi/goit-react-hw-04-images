@@ -23,9 +23,10 @@ export const SearchForm = styled.form`
 export const SearchInput = styled.input`
   display: inline-block;
   width: 100%;
+  height: 48px;
+  padding-left: 20px;
   font-size: 20px;
   border: none;
-  height: 48px;
 
   ::placeholder {
     font-size: 18px;
