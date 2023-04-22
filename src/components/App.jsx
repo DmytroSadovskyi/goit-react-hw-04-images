@@ -10,11 +10,15 @@ import Spinner from 'components/Loader/Loader';
 
 const App = () => {
   const [images, setImages] = useState([]);
+  const [totalImages, setTotalImages] = useState(0);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSubmited, setIsSubmited] = useState(false);
+
+  const maxPage = Math.ceil(totalImages / 12);
+  const showButton = images.length > 0 && CurrentPage < maxPage;
 
   useEffect(() => {
     if (!query) {
@@ -24,8 +28,12 @@ const App = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const { hits } = await fetchImagesByQuery(query, CurrentPage);
+        const { hits, totalHits } = await fetchImagesByQuery(
+          query,
+          CurrentPage
+        );
         setImages(prevImages => [...prevImages, ...hits]);
+        setTotalImages(totalHits);
         setIsSubmited(true);
       } catch (error) {
         setError('Try again');
@@ -48,8 +56,6 @@ const App = () => {
   const loadMore = () => {
     setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
   };
-
-  const shouldRenderLoadMoreButton = images.length > 0 && !isLoading;
 
   if (error) {
     return <p>{error.message}</p>;
@@ -74,9 +80,7 @@ const App = () => {
         )}
         {images.length > 0 && <ImagesGallery images={images} />}
         {isLoading && <Spinner />}
-        {shouldRenderLoadMoreButton && (
-          <LoadMoreButton onButtonClick={loadMore} />
-        )}
+        {showButton && <LoadMoreButton onButtonClick={loadMore} />}
 
         <ScrollToTop
           showUnder={160}
