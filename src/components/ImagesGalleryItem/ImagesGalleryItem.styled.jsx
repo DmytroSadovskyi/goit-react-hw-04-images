@@ -10,10 +10,11 @@ export const GalleryImage = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
-  transition: transform var(--animation-duration) var(--timing-function);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     transform: scale(1.03);
+    cursor: zoom-in;
   }
 `;
 
