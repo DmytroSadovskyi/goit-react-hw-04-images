@@ -42,6 +42,7 @@ const App = () => {
     setCurrentPage(1);
     setImages([]);
     setError(null);
+    setIsSubmited(false);
   };
 
   const loadMore = () => {
@@ -66,7 +67,7 @@ const App = () => {
             </p>
           </div>
         )}
-        {isSubmited && images.length === 0 && !isLoading && (
+        {isSubmited && images.length === 0 && (
           <p style={{ maxWidth: '206px', margin: 'auto' }}>
             Sorry but we did not find any images 😔 Please try again
           </p>
