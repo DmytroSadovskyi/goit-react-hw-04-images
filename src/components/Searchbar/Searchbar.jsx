@@ -12,7 +12,6 @@ import {
 import PropTypes from 'prop-types';
 const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
-
   const handleChange = e => {
     const { value } = e.currentTarget;
     setQuery(value.trim());
