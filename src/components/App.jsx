@@ -58,7 +58,7 @@ const App = () => {
   };
 
   if (error) {
-    return <p>{error.message}</p>;
+    return <p>{error}</p>;
   }
 
   return (
